@@ -24,16 +24,14 @@ function Home() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!article.trim()) {
-      setResult(null);
-      setError('Add an article first so there’s something to summarize.');
-      return;
-    }
-    setError('');
-    setResult(summarizeArticle(article.trim()));
-  }
+    const trimmed = article.trim();
+const words = trimmed ? trimmed.split(/\s+/).length : 0;
 
-  return (
+ if (words < 15) {
+  setResult(null);
+  setError('Please paste a full environmental news article (at least 15 words).');
+  return;
+    return (
     <main className="page-shell">
       <div className="content-wrap">
         <header className="topbar">
